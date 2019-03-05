@@ -1,0 +1,19 @@
+Project materials to complete the DevOps code challenge for Seek:
+
+
+it was designed to be bootstrapped with ansible, using the following command:
+
+ansible-playbook -i 'localhost,', aws-bootstrap.yml
+
+
+Unfortunately orchestrating Lambda is not something I've done before and despiste 
+my research efforts the past day the playbook is still buggy - I will need to use lambda_facts 
+and build out the Ansible playbook but at this point I'm too constrained for time.
+
+The project will:
+
+Create a AWS Lambda to update a security group with HTTP/HTTPS ingress allowed
+
+Create a AWS CloudWatch cron event to trigger the Lamdba above once daily
+
+Create a AWS API Gateway that will trigger the Lambda above upon reciept of POST request

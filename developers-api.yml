@@ -1,0 +1,34 @@
+---
+swagger: "2.0"
+info:
+  version: "2019-03-05T16:05:09Z"
+  title: "developers-api"
+host: "ccs2idepp5.execute-api.us-west-2.amazonaws.com"
+basePath: "/default"
+schemes:
+- "https"
+paths:
+  /update_sg:
+    post:
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/Empty"
+    x-amazon-apigateway-any-method:
+      responses:
+        200:
+          description: "200 response"
+      security:
+      - api_key: []
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
+definitions:
+  Empty:
+    type: "object"
+    title: "Empty Schema"
