@@ -6,9 +6,9 @@ import urllib3
 import certifi
 import json
 
-api_key = 'AKIAI5AKMUO2PMRUZTYA'
-api_cred = 'raSN6wmeYJ1Tk+iTjFkKsPCxWpIyXEHj66k3PTvl'
-api_region = 'us-west-2'
+api_key = ''
+api_cred = ''
+api_region = ''
 '''
 AWS Lambda handler 
 It is either called as  POST request via API Gateway with a json body { 'ip_to_allow':'xxx.xxx.xxx.xxx/xx' }
