@@ -1,0 +1,39 @@
+---
+- name: Bootstrap the deployment  
+  hosts: all
+  connection: local
+  gather_facts: False
+  
+  vars:
+    
+  
+  tasks:
+    - name: create AWS function
+      lambda: 
+        name: 'update-sg'
+        state: present
+        zip_file: 'lambda_function.zip'
+        region: 'us-west-2'
+        timeout: 300
+        runtime: python2.7
+        role: 'arn:aws:iam::232084679751:role/service-role/update-sg-role'
+        handler: lambda_function.lambda_handler
+            
+    - name: Create Cloudwatch Event
+      cloudwatchevent_rule:
+        name: github_hooks_cw
+        region: 'us-west-2'
+        description: 'Trigger daily to update github-hooks security group'
+        schedule_expression: 'cron(0 1 * * ? *)'
+        state: present
+        targets:
+           - id: '1'
+             arn: 'arn:aws:lambda:us-west-2:232084679751:function:update-sg'
+        
+    - name: Create API Gateway
+      aws_api_gateway:
+        state: present
+        region: 'us-west-2'
+        swagger_file: 'developers-api.yml'
+        
+    
